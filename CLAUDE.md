@@ -121,6 +121,32 @@ types/
 }
 ```
 
+**TypeScript Interfaces Updated**:
+```typescript
+export interface KioskState {
+  currentView: 'carousel' | 'shoe360' | 'newArrivals' | 'spinViewer'; // Added spinViewer
+  currentSlide: number;
+  selectedProduct?: JordanProduct;
+  isUserInteracting: boolean;
+  lastInteractionTime: number;
+}
+
+export interface FootlockerSpinViewerProps {
+  productId?: string;
+  onClose: () => void;
+  title?: string;
+  description?: string;
+}
+
+export interface CarouselProps {
+  slides: CarouselSlide[];
+  onTouchStart: () => void;
+  autoAdvance: boolean;
+  currentSlide?: number;          // NEW: External slide control
+  onSlideChange?: (slideIndex: number) => void; // NEW: Slide change callback
+}
+```
+
 ### 4. Main App Component (`app/page.tsx`)
 
 **Purpose**: Application orchestrator managing state and navigation
