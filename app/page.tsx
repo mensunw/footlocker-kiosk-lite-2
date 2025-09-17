@@ -162,7 +162,7 @@ export default function KioskApp() {
   }, [newArrivals]);
 
   return (
-    <div className="w-full h-screen overflow-hidden bg-black">
+    <div className="w-full h-screen overflow-hidden bg-white">
       <InteractionDetector onInteraction={handleInteraction}>
         <AnimatePresence mode="wait">
           {kioskState.currentView === 'carousel' && (

@@ -52,7 +52,7 @@ const KioskCarousel: React.FC<CarouselProps> = ({
 
   return (
     <div
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden bg-white"
       onClick={handleTouchInteraction}
       onTouchStart={handleTouchInteraction}
     >
@@ -67,25 +67,33 @@ const KioskCarousel: React.FC<CarouselProps> = ({
         >
           {/* Background Media - Image or Video */}
           {slide.backgroundVideo ? (
-            <video
-              key={`video-${currentSlide}`}
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              onLoadedData={(e) => {
-                const video = e.target as HTMLVideoElement;
-                video.currentTime = 0;
-                video.play().catch(() => {
-                  // Silently handle autoplay failures
-                });
-              }}
-            >
-              <source src={slide.backgroundVideo} type="video/mp4" />
-              <source src={slide.backgroundVideo} type="video/mov" />
-            </video>
+            <>
+              {/* White background for video slide */}
+              <div className="absolute inset-0 w-full h-full bg-white" />
+
+              {/* Smaller, centered video */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <video
+                  key={`video-${currentSlide}`}
+                  className="w-2/3 h-2/3 object-contain"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  onLoadedData={(e) => {
+                    const video = e.target as HTMLVideoElement;
+                    video.currentTime = 0;
+                    video.play().catch(() => {
+                      // Silently handle autoplay failures
+                    });
+                  }}
+                >
+                  <source src={slide.backgroundVideo} type="video/mp4" />
+                  <source src={slide.backgroundVideo} type="video/mov" />
+                </video>
+              </div>
+            </>
           ) : slide.backgroundImage ? (
             <div
               className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
@@ -94,18 +102,20 @@ const KioskCarousel: React.FC<CarouselProps> = ({
               }}
             />
           ) : (
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-black" />
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-white" />
           )}
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Conditional gradient overlay - only for image slides */}
+          {!slide.backgroundVideo && (
+            <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
+          )}
 
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-between p-12">
             {/* Top Branding */}
             <div className="flex justify-between items-start">
-              <FootlockerLogo size="large" variant="light" />
-              <OptiSignsLogo size="small" variant="light" />
+              <FootlockerLogo size="large" variant="dark" />
+              <OptiSignsLogo size="small" variant="dark" />
             </div>
 
             {/* Main Content */}
@@ -114,7 +124,14 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight leading-tight"
+                className={`text-6xl md:text-8xl font-black mb-6 tracking-tight leading-tight ${
+                  slide.backgroundVideo
+                    ? 'text-black drop-shadow-xl'
+                    : 'text-black text-shadow'
+                }`}
+                style={slide.backgroundVideo ? {
+                  textShadow: '2px 2px 0px rgba(255,255,255,0.8), -2px -2px 0px rgba(255,255,255,0.8), 2px -2px 0px rgba(255,255,255,0.8), -2px 2px 0px rgba(255,255,255,0.8)'
+                } : {}}
               >
                 {slide.title}
               </motion.h1>
@@ -123,7 +140,14 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="text-2xl md:text-4xl font-bold text-orange-400 mb-8 tracking-wide"
+                className={`text-2xl md:text-4xl font-bold mb-8 tracking-wide ${
+                  slide.backgroundVideo
+                    ? 'text-orange-700 drop-shadow-lg'
+                    : 'text-orange-600 text-shadow'
+                }`}
+                style={slide.backgroundVideo ? {
+                  textShadow: '1px 1px 0px rgba(255,255,255,0.9), -1px -1px 0px rgba(255,255,255,0.9), 1px -1px 0px rgba(255,255,255,0.9), -1px 1px 0px rgba(255,255,255,0.9)'
+                } : {}}
               >
                 {slide.subtitle}
               </motion.h2>
@@ -132,7 +156,14 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
-                className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed"
+                className={`text-xl md:text-2xl max-w-2xl leading-relaxed ${
+                  slide.backgroundVideo
+                    ? 'text-gray-900 drop-shadow-md'
+                    : 'text-gray-800 text-shadow'
+                }`}
+                style={slide.backgroundVideo ? {
+                  textShadow: '1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(255,255,255,0.8)'
+                } : {}}
               >
                 {slide.description}
               </motion.p>
@@ -146,10 +177,24 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                 transition={{ delay: 1, duration: 0.6 }}
                 className="text-center"
               >
-                <div className="text-white/80 text-lg mb-2">
+                <div className={`text-lg mb-2 ${
+                  slide.backgroundVideo
+                    ? 'text-gray-800 drop-shadow-md'
+                    : 'text-gray-700 text-shadow'
+                }`}
+                style={slide.backgroundVideo ? {
+                  textShadow: '1px 1px 0px rgba(255,255,255,0.8)'
+                } : {}}>
                   {interactiveMessages.touch}
                 </div>
-                <div className="text-orange-400 text-xl font-bold">
+                <div className={`text-xl font-bold ${
+                  slide.backgroundVideo
+                    ? 'text-orange-700 drop-shadow-lg'
+                    : 'text-orange-600 text-shadow'
+                }`}
+                style={slide.backgroundVideo ? {
+                  textShadow: '1px 1px 0px rgba(255,255,255,0.9), -1px -1px 0px rgba(255,255,255,0.9)'
+                } : {}}>
                   {interactiveMessages.interact}
                 </div>
               </motion.div>
@@ -161,8 +206,8 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                     key={index}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentSlide
-                        ? 'bg-orange-400 scale-125'
-                        : 'bg-white/30'
+                        ? 'bg-orange-600 scale-125'
+                        : 'bg-gray-400'
                     }`}
                   />
                 ))}

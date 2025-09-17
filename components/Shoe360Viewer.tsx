@@ -100,18 +100,18 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 w-full h-screen bg-black z-50 overflow-hidden"
+      className="fixed inset-0 w-full h-screen bg-white z-50 overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-100 to-white" />
 
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 z-20 p-8">
         <div className="flex justify-between items-center">
-          <FootlockerLogo size="medium" variant="light" />
+          <FootlockerLogo size="medium" variant="dark" />
           <button
             onClick={onClose}
-            className="text-white text-4xl font-light hover:text-orange-400 transition-colors"
+            className="text-black text-4xl font-light hover:text-orange-600 transition-colors"
           >
             ×
           </button>
@@ -122,10 +122,10 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
       <div className="flex flex-col h-full pt-24 pb-16">
         {/* Title and Instructions */}
         <div className="text-center mb-8 px-8">
-          <h1 className="text-4xl font-black text-white mb-4">
+          <h1 className="text-4xl font-black text-black mb-4">
             {interactiveMessages.spin}
           </h1>
-          <p className="text-lg text-white/80">
+          <p className="text-lg text-gray-700">
             {interactiveMessages.interact}
           </p>
         </div>
@@ -138,7 +138,7 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
           style={{ touchAction: 'none' }}
         >
           {!imagesLoaded ? (
-            <div className="text-white text-xl">Loading 360° viewer...</div>
+            <div className="text-black text-xl">Loading 360° viewer...</div>
           ) : (
             <motion.div
               className="relative select-none"
@@ -157,11 +157,11 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
 
               {/* Rotation indicator */}
               <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-                <div className="flex items-center space-x-2 text-white/60">
+                <div className="flex items-center space-x-2 text-gray-600">
                   <span className="text-sm">360°</span>
-                  <div className="w-16 h-1 bg-white/20 rounded-full overflow-hidden">
+                  <div className="w-16 h-1 bg-gray-300 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-orange-400 rounded-full transition-all duration-150"
+                      className="h-full bg-orange-600 rounded-full transition-all duration-150"
                       style={{
                         width: `${((currentImageIndex / (images?.length || 1)) * 100)}%`,
                       }}
@@ -174,7 +174,7 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
 
           {/* Touch hints */}
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="flex space-x-8 text-white/60 text-sm text-center">
+            <div className="flex space-x-8 text-gray-600 text-sm text-center">
               <div>
                 <div className="mb-1">↔</div>
                 <div>Drag to rotate</div>
@@ -190,13 +190,13 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
         {/* Product Info */}
         <div className="px-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-white mb-2">
+            <h2 className="text-2xl font-bold text-black mb-2">
               {product.name}
             </h2>
-            <p className="text-lg text-white/70 mb-2">
+            <p className="text-lg text-gray-700 mb-2">
               {product.colorway}
             </p>
-            <p className="text-3xl font-bold text-orange-400">
+            <p className="text-3xl font-bold text-orange-600">
               ${product.price}
             </p>
           </div>
@@ -206,12 +206,12 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
       {/* Footer */}
       <div className="absolute bottom-0 left-0 right-0 p-8">
         <div className="flex justify-center">
-          <OptiSignsLogo size="small" variant="light" />
+          <OptiSignsLogo size="small" variant="dark" />
         </div>
       </div>
 
       {/* Back to Carousel hint */}
-      <div className="absolute top-1/2 right-8 transform -translate-y-1/2 text-white/40 text-sm rotate-90 origin-center">
+      <div className="absolute top-1/2 right-8 transform -translate-y-1/2 text-gray-500 text-sm rotate-90 origin-center">
         Tap outside to return
       </div>
     </motion.div>

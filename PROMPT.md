@@ -1,1 +1,1 @@
-can you revert the colors? i.e the background would be white, and the text would be black
+can you revert previous changes, it's fine
