@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useSpring, useTransform } from 'framer-motion';
 import { useGesture } from 'react-use-gesture';
+import Image from 'next/image';
 import { Shoe360ViewerProps } from '../types';
 import FootlockerLogo from './FootlockerLogo';
 import OptiSignsLogo from './OptiSignsLogo';
@@ -34,7 +35,7 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
     try {
       const loadPromises = images.map((src) => {
         return new Promise((resolve, reject) => {
-          const img = new Image();
+          const img = new window.Image();
           img.onload = resolve;
           img.onerror = reject;
           img.src = src;
@@ -148,11 +149,15 @@ const Shoe360Viewer: React.FC<Shoe360ViewerProps> = ({
                 y: transformY,
               }}
             >
-              <img
+              <Image
                 src={currentImage}
                 alt={`${product.name} - 360° view`}
+                width={384}
+                height={384}
                 className="w-96 h-96 object-contain pointer-events-none"
                 draggable={false}
+                priority
+                sizes="384px"
               />
 
               {/* Rotation indicator */}

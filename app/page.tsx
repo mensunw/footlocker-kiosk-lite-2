@@ -67,6 +67,14 @@ export default function KioskApp() {
     }
   }, [kioskState.currentView, resetTimer]);
 
+  // Handle slide change in carousel
+  const handleSlideChange = useCallback((slideIndex: number) => {
+    setKioskState(prev => ({
+      ...prev,
+      currentSlide: slideIndex,
+    }));
+  }, []);
+
   // Handle carousel touch start
   const handleCarouselTouch = useCallback(() => {
     resetTimer();
@@ -182,6 +190,8 @@ export default function KioskApp() {
               slides={carouselSlides}
               onTouchStart={handleCarouselTouch}
               autoAdvance={!kioskState.isUserInteracting}
+              currentSlide={kioskState.currentSlide}
+              onSlideChange={handleSlideChange}
             />
           )}
 

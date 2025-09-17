@@ -3,12 +3,10 @@ import { JordanProduct } from '../types';
 export const jordanProducts: JordanProduct[] = [
   {
     id: 'aj1-bred-toe',
-    name: 'Air Jordan 1 Retro High OG "Bred Toe"',
+    name: 'Jordan Retro 5 OG',
     price: 170,
     images: [
-      '/api/placeholder/400/400?text=AJ1+Bred+Toe+1',
-      '/api/placeholder/400/400?text=AJ1+Bred+Toe+2',
-      '/api/placeholder/400/400?text=AJ1+Bred+Toe+3',
+      "https://images.footlocker.com/is/image/EBFL2/Q7978101?wid=250&hei=250"
     ],
     shoe360Images: Array.from({ length: 36 }, (_, i) =>
       `/api/placeholder/800/800?text=AJ1+360+${i + 1}`
@@ -20,12 +18,10 @@ export const jordanProducts: JordanProduct[] = [
   },
   {
     id: 'aj4-black-cat',
-    name: 'Air Jordan 4 Retro "Black Cat"',
+    name: 'Nike Air Diamond Turf',
     price: 200,
     images: [
-      '/api/placeholder/400/400?text=AJ4+Black+Cat+1',
-      '/api/placeholder/400/400?text=AJ4+Black+Cat+2',
-      '/api/placeholder/400/400?text=AJ4+Black+Cat+3',
+      "https://images.footlocker.com/is/image/EBFL2/F2534100?wid=250&hei=250"
     ],
     shoe360Images: Array.from({ length: 36 }, (_, i) =>
       `/api/placeholder/800/800?text=AJ4+360+${i + 1}`
@@ -36,31 +32,11 @@ export const jordanProducts: JordanProduct[] = [
     category: 'men',
   },
   {
-    id: 'aj11-jubilee',
-    name: 'Air Jordan 11 Retro "Jubilee"',
-    price: 220,
-    originalPrice: 250,
-    images: [
-      '/api/placeholder/400/400?text=AJ11+Jubilee+1',
-      '/api/placeholder/400/400?text=AJ11+Jubilee+2',
-      '/api/placeholder/400/400?text=AJ11+Jubilee+3',
-    ],
-    shoe360Images: Array.from({ length: 36 }, (_, i) =>
-      `/api/placeholder/800/800?text=AJ11+360+${i + 1}`
-    ),
-    colorway: 'White/Black-Metallic Silver',
-    sizes: ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '13'],
-    isNewArrival: false,
-    category: 'men',
-  },
-  {
     id: 'aj3-white-cement',
-    name: 'Air Jordan 3 Retro "White Cement"',
+    name: 'Nike Dunk Low',
     price: 190,
     images: [
-      '/api/placeholder/400/400?text=AJ3+White+Cement+1',
-      '/api/placeholder/400/400?text=AJ3+White+Cement+2',
-      '/api/placeholder/400/400?text=AJ3+White+Cement+3',
+      "https://images.footlocker.com/is/image/EBFL2/B9109013?wid=250&hei=250"
     ],
     shoe360Images: Array.from({ length: 36 }, (_, i) =>
       `/api/placeholder/800/800?text=AJ3+360+${i + 1}`
@@ -72,12 +48,10 @@ export const jordanProducts: JordanProduct[] = [
   },
   {
     id: 'aj6-infrared',
-    name: 'Air Jordan 6 Retro "Infrared"',
+    name: 'New Balance 1967R',
     price: 190,
     images: [
-      '/api/placeholder/400/400?text=AJ6+Infrared+1',
-      '/api/placeholder/400/400?text=AJ6+Infrared+2',
-      '/api/placeholder/400/400?text=AJ6+Infrared+3',
+      "https://images.footlocker.com/is/image/EBFL2/1906RCFU?wid=250&hei=250"
     ],
     shoe360Images: Array.from({ length: 36 }, (_, i) =>
       `/api/placeholder/800/800?text=AJ6+360+${i + 1}`
@@ -85,23 +59,6 @@ export const jordanProducts: JordanProduct[] = [
     colorway: 'Black/Infrared 23-Black',
     sizes: ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '13'],
     isNewArrival: true,
-    category: 'men',
-  },
-  {
-    id: 'aj12-taxi',
-    name: 'Air Jordan 12 Retro "Taxi"',
-    price: 190,
-    images: [
-      '/api/placeholder/400/400?text=AJ12+Taxi+1',
-      '/api/placeholder/400/400?text=AJ12+Taxi+2',
-      '/api/placeholder/400/400?text=AJ12+Taxi+3',
-    ],
-    shoe360Images: Array.from({ length: 36 }, (_, i) =>
-      `/api/placeholder/800/800?text=AJ12+360+${i + 1}`
-    ),
-    colorway: 'White/Black-Taxi',
-    sizes: ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '13'],
-    isNewArrival: false,
     category: 'men',
   },
 ];

@@ -1,30 +1,36 @@
 'use client';
 
+import Image from 'next/image';
 import { BrandingProps } from '../types';
 
 const OptiSignsLogo: React.FC<BrandingProps> = ({
   size = 'small',
-  variant = 'light',
+  variant = 'dark',
   className = ''
 }) => {
   const sizeClasses = {
-    small: 'h-6',
-    medium: 'h-12',
-    large: 'h-16'
+    small: { width: 80, height: 24 },
+    medium: { width: 160, height: 48 },
+    large: { width: 200, height: 64 }
   };
+
+  const dimensions = sizeClasses[size];
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <div className={`text-xs text-black/70 font-medium`}>
         Powered by
       </div>
-      <img
+      <Image
         src="/optisigns-logo.svg"
         alt="OptiSigns"
-        className={`${sizeClasses[size]} object-contain`}
+        width={dimensions.width}
+        height={dimensions.height}
+        className="object-contain"
         style={{
-          filter: 'brightness(0) saturate(100%)'
+          filter: variant === 'dark' ? 'brightness(0) saturate(100%)' : 'none'
         }}
+        priority
       />
     </div>
   );

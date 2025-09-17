@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { CarouselProps } from '../types';
 import FootlockerLogo from './FootlockerLogo';
 import OptiSignsLogo from './OptiSignsLogo';
@@ -11,19 +12,21 @@ import { getNewArrivals } from '../data/jordanProducts';
 const KioskCarousel: React.FC<CarouselProps> = ({
   slides,
   onTouchStart,
-  autoAdvance
+  autoAdvance,
+  currentSlide = 0,
+  onSlideChange
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const newArrivals = getNewArrivals().slice(0, 4); // Get first 4 shoes
 
   const nextSlide = useCallback(() => {
-    if (!isAnimating) {
+    if (!isAnimating && onSlideChange) {
       setIsAnimating(true);
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      const newSlide = (currentSlide + 1) % slides.length;
+      onSlideChange(newSlide);
       setTimeout(() => setIsAnimating(false), 500);
     }
-  }, [slides.length, isAnimating]);
+  }, [slides.length, isAnimating, currentSlide, onSlideChange]);
 
   const startAutoCarousel = useCallback(() => {
     if (!autoAdvance) return;
@@ -192,10 +195,13 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                     >
                       {/* Product Image */}
                       <div className="aspect-square mb-2 bg-gray-100 rounded-md overflow-hidden">
-                        <img
+                        <Image
                           src={product.images[0]}
                           alt={product.name}
+                          width={150}
+                          height={150}
                           className="w-full h-full object-cover"
+                          sizes="150px"
                         />
                       </div>
 

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { NewArrivalsProps } from '../types';
 import FootlockerLogo from './FootlockerLogo';
 import OptiSignsLogo from './OptiSignsLogo';
@@ -103,10 +104,13 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({
 
                 {/* Product Image */}
                 <div className="aspect-square mb-6 bg-gray-100 rounded-xl overflow-hidden">
-                  <img
+                  <Image
                     src={product.images[0]}
                     alt={product.name}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
+                    sizes="300px"
                   />
                 </div>
 

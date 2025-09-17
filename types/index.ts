@@ -48,6 +48,8 @@ export interface CarouselProps {
   slides: CarouselSlide[];
   onTouchStart: () => void;
   autoAdvance: boolean;
+  currentSlide?: number;
+  onSlideChange?: (slideIndex: number) => void;
 }
 
 export interface NewArrivalsProps {

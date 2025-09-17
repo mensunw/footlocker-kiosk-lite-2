@@ -1,11 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Footlocker Interactive Kiosk",
   description: "Interactive portrait video kiosk for Footlocker - Netherlands event",
-  viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
   robots: "noindex, nofollow",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -16,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-hidden">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
