@@ -6,6 +6,7 @@ import { CarouselProps } from '../types';
 import FootlockerLogo from './FootlockerLogo';
 import OptiSignsLogo from './OptiSignsLogo';
 import { interactiveMessages } from '../data/carouselContent';
+import { getNewArrivals } from '../data/jordanProducts';
 
 const KioskCarousel: React.FC<CarouselProps> = ({
   slides,
@@ -14,6 +15,7 @@ const KioskCarousel: React.FC<CarouselProps> = ({
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const newArrivals = getNewArrivals().slice(0, 4); // Get first 4 shoes
 
   const nextSlide = useCallback(() => {
     if (!isAnimating) {
@@ -169,6 +171,50 @@ const KioskCarousel: React.FC<CarouselProps> = ({
                     <source src={slide.backgroundVideo} type="video/mp4" />
                     <source src={slide.backgroundVideo} type="video/mov" />
                   </video>
+                </motion.div>
+              )}
+
+              {/* Shoes grid for the last slide (Fresh Jordan Arrivals) */}
+              {slide.id === '5' && (
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.8 }}
+                  className="grid grid-cols-4 gap-3 max-w-3xl mx-auto mt-6"
+                >
+                  {newArrivals.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 1 + index * 0.08, duration: 0.4 }}
+                      className="bg-gray-50 rounded-lg p-3 border border-gray-200 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      {/* Product Image */}
+                      <div className="aspect-square mb-2 bg-gray-100 rounded-md overflow-hidden">
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      {/* Product Info */}
+                      <div className="text-center">
+                        <h3 className="text-xs font-bold text-black mb-1 leading-tight line-clamp-2">
+                          {product.name.split(' ').slice(0, 3).join(' ')}
+                        </h3>
+                        <p className="text-sm font-bold text-orange-600">
+                          ${product.price}
+                        </p>
+                        {product.isNewArrival && (
+                          <div className="inline-block bg-orange-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full mt-1">
+                            NEW
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
                 </motion.div>
               )}
             </div>

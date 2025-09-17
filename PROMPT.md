@@ -1,2 +1,1 @@
-look img: /Users/mensun/Desktop/Screenshot 2025-09-17 at 10.28.20 AM.png
-can you make their size the same, and align them?
+For the previous change, can you make the shoe components smaller, and fit 4? Also note how the bottom text "Touch anywhere to explore..." isn't visible anymore
