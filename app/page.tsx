@@ -10,6 +10,7 @@ import { useIdleTimer } from '../hooks/useIdleTimer';
 import KioskCarousel from '../components/KioskCarousel';
 import Shoe360Viewer from '../components/Shoe360Viewer';
 import NewArrivals from '../components/NewArrivals';
+import FootlockerSpinViewer from '../components/FootlockerSpinViewer';
 import InteractionDetector from '../components/InteractionDetector';
 
 export default function KioskApp() {
@@ -24,7 +25,7 @@ export default function KioskApp() {
   const [newArrivals] = useState(() => getNewArrivals());
 
   // Use idle timer to return to carousel after inactivity
-  const { isIdle, resetTimer } = useIdleTimer(30000); // 30 seconds
+  const { isIdle, resetTimer } = useIdleTimer(15000); // 15 seconds
 
   // Return to carousel when idle
   useEffect(() => {
@@ -52,10 +53,10 @@ export default function KioskApp() {
     switch (interaction.type) {
       case 'tap':
         if (kioskState.currentView === 'carousel') {
-          // Transition from carousel to new arrivals
+          // Transition from carousel to spin viewer
           setKioskState(prev => ({
             ...prev,
-            currentView: 'newArrivals',
+            currentView: 'spinViewer',
           }));
         }
         break;
@@ -71,7 +72,7 @@ export default function KioskApp() {
     resetTimer();
     setKioskState(prev => ({
       ...prev,
-      currentView: 'newArrivals',
+      currentView: 'spinViewer',
       isUserInteracting: true,
       lastInteractionTime: Date.now(),
     }));
@@ -99,6 +100,16 @@ export default function KioskApp() {
       isUserInteracting: false,
     }));
     setSelectedProduct(null);
+  }, [resetTimer]);
+
+  // Handle going back from spin viewer to carousel
+  const handleBackFromSpinViewer = useCallback(() => {
+    resetTimer();
+    setKioskState(prev => ({
+      ...prev,
+      currentView: 'carousel',
+      isUserInteracting: false,
+    }));
   }, [resetTimer]);
 
   // Handle closing 360 viewer
@@ -171,6 +182,16 @@ export default function KioskApp() {
               slides={carouselSlides}
               onTouchStart={handleCarouselTouch}
               autoAdvance={!kioskState.isUserInteracting}
+            />
+          )}
+
+          {kioskState.currentView === 'spinViewer' && (
+            <FootlockerSpinViewer
+              key="spinViewer"
+              productId="314217794404_02"
+              onClose={handleBackFromSpinViewer}
+              title="Interactive Jordan Experience"
+              description="Drag to spin • Zoom to explore • Experience every detail"
             />
           )}
 

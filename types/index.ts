@@ -31,7 +31,7 @@ export interface TouchInteraction {
 }
 
 export interface KioskState {
-  currentView: 'carousel' | 'shoe360' | 'newArrivals';
+  currentView: 'carousel' | 'shoe360' | 'newArrivals' | 'spinViewer';
   currentSlide: number;
   selectedProduct?: JordanProduct;
   isUserInteracting: boolean;
@@ -66,4 +66,11 @@ export interface BrandingProps {
   size?: 'small' | 'medium' | 'large';
   variant?: 'light' | 'dark';
   className?: string;
+}
+
+export interface FootlockerSpinViewerProps {
+  productId?: string;
+  onClose: () => void;
+  title?: string;
+  description?: string;
 }

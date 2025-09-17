@@ -1,1 +1,1 @@
-For the previous change, can you make the shoe components smaller, and fit 4? Also note how the bottom text "Touch anywhere to explore..." isn't visible anymore
+can you change from 30 seconds to 15 seconds to make user return automatically?
