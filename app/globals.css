@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* Kiosk-specific CSS variables and styles */
+:root {
+  --footlocker-orange: #FF6900;
+  --footlocker-orange-dark: #E55A00;
+  --footlocker-black: #000000;
+  --footlocker-gray-dark: #1A1A1A;
+  --footlocker-gray-medium: #333333;
+
+  /* Kiosk dimensions - optimized for 1080x1920 portrait displays */
+  --kiosk-width: 1080px;
+  --kiosk-height: 1920px;
+  --kiosk-aspect-ratio: 9/16;
+
+  /* Touch interaction areas */
+  --touch-min-size: 44px;
+  --touch-comfortable-size: 60px;
+}
+
+/* Global kiosk styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+html {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background: #000000;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-display: swap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+/* Disable browser zoom and selection on kiosk */
+body {
+  zoom: 1;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-modify: none;
+  -webkit-highlight: none;
+}
+
+/* Portrait orientation optimization */
+@media (orientation: portrait) {
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* Hide scrollbars but maintain functionality */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom touch interactions */
+.touch-area {
+  min-height: var(--touch-min-size);
+  min-width: var(--touch-min-size);
+  cursor: pointer;
+}
+
+.touch-feedback {
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.touch-feedback:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+/* Kiosk-specific animations */
+@keyframes pulseOrange {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.pulse-orange {
+  animation: pulseOrange 2s infinite;
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  :root {
+    --footlocker-orange: #FF7700;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility (keyboard navigation) */
+*:focus {
+  outline: 2px solid var(--footlocker-orange);
+  outline-offset: 2px;
+}
+
+/* Prevent image dragging */
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Make sure interactive elements are draggable */
+button, [role="button"], .interactive {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Ensure text is readable on all backgrounds */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
