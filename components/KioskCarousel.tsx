@@ -67,33 +67,7 @@ const KioskCarousel: React.FC<CarouselProps> = ({
         >
           {/* Background Media - Image or Video */}
           {slide.backgroundVideo ? (
-            <>
-              {/* White background for video slide */}
-              <div className="absolute inset-0 w-full h-full bg-white" />
-
-              {/* Smaller, centered video */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <video
-                  key={`video-${currentSlide}`}
-                  className="w-2/3 h-2/3 object-contain"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  onLoadedData={(e) => {
-                    const video = e.target as HTMLVideoElement;
-                    video.currentTime = 0;
-                    video.play().catch(() => {
-                      // Silently handle autoplay failures
-                    });
-                  }}
-                >
-                  <source src={slide.backgroundVideo} type="video/mp4" />
-                  <source src={slide.backgroundVideo} type="video/mov" />
-                </video>
-              </div>
-            </>
+            <div className="absolute inset-0 w-full h-full bg-white" />
           ) : slide.backgroundImage ? (
             <div
               className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
@@ -167,6 +141,36 @@ const KioskCarousel: React.FC<CarouselProps> = ({
               >
                 {slide.description}
               </motion.p>
+
+              {/* Video positioned between description and call-to-action - only for video slides */}
+              {slide.backgroundVideo && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.6 }}
+                  className="flex justify-center mt-8"
+                >
+                  <video
+                    key={`inline-video-${currentSlide}`}
+                    className="w-80 h-60 object-contain"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    onLoadedData={(e) => {
+                      const video = e.target as HTMLVideoElement;
+                      video.currentTime = 0;
+                      video.play().catch(() => {
+                        // Silently handle autoplay failures
+                      });
+                    }}
+                  >
+                    <source src={slide.backgroundVideo} type="video/mp4" />
+                    <source src={slide.backgroundVideo} type="video/mov" />
+                  </video>
+                </motion.div>
+              )}
             </div>
 
             {/* Bottom Call to Action */}

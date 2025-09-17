@@ -1,1 +1,2 @@
-can you revert previous changes, it's fine
+can you move video to be between "discover your next favorite pair" and "Touch anywhere to explore" textm and make it small enough to fit there
+/Users/mensun/Desktop/Screenshot 2025-09-17 at 10.01.32 AM.png
