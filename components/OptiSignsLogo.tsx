@@ -8,21 +8,24 @@ const OptiSignsLogo: React.FC<BrandingProps> = ({
   className = ''
 }) => {
   const sizeClasses = {
-    small: 'text-xs',
-    medium: 'text-sm',
-    large: 'text-base'
+    small: 'h-6',
+    medium: 'h-12',
+    large: 'h-16'
   };
-
-  const textColor = variant === 'light' ? 'text-white/70' : 'text-black/70';
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className={`${sizeClasses[size]} ${textColor} font-medium`}>
+      <div className={`text-xs text-black/70 font-medium`}>
         Powered by
       </div>
-      <div className={`${sizeClasses[size]} ${textColor} font-bold`}>
-        OptiSigns
-      </div>
+      <img
+        src="/optisigns-logo.svg"
+        alt="OptiSigns"
+        className={`${sizeClasses[size]} object-contain`}
+        style={{
+          filter: 'brightness(0) saturate(100%)'
+        }}
+      />
     </div>
   );
 };

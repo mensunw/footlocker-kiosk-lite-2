@@ -87,9 +87,9 @@ const KioskCarousel: React.FC<CarouselProps> = ({
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-between p-12">
             {/* Top Branding */}
-            <div className="flex justify-between items-start">
-              <FootlockerLogo size="large" variant="dark" />
-              <OptiSignsLogo size="small" variant="dark" />
+            <div className="flex justify-between items-center">
+              <FootlockerLogo size="medium" variant="dark" />
+              <OptiSignsLogo size="medium" variant="dark" />
             </div>
 
             {/* Main Content */}

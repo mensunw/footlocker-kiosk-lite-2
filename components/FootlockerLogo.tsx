@@ -13,13 +13,16 @@ const FootlockerLogo: React.FC<BrandingProps> = ({
     large: 'w-64 h-16'
   };
 
-  const textColor = variant === 'light' ? 'text-white' : 'text-black';
-
   return (
     <div className={`flex items-center ${sizeClasses[size]} ${className}`}>
-      <div className={`font-black text-xl ${textColor} tracking-wider`}>
-        FOOT LOCKER
-      </div>
+      <img
+        src="/Footlocker logo.svg"
+        alt="Foot Locker"
+        className="w-full h-full object-contain"
+        style={{
+          filter: 'brightness(0) saturate(100%)'
+        }}
+      />
     </div>
   );
 };
