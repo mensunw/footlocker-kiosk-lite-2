@@ -117,14 +117,27 @@ export default function KioskApp() {
   useEffect(() => {
     const preloadAssets = async () => {
       try {
-        // Preload carousel images
+        // Preload carousel images and videos
         const carouselPromises = carouselSlides.map(slide => {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = resolve;
-            img.onerror = reject;
-            img.src = slide.backgroundImage;
-          });
+          if (slide.backgroundVideo) {
+            // Preload video
+            return new Promise((resolve, reject) => {
+              const video = document.createElement('video');
+              video.onloadeddata = resolve;
+              video.onerror = reject;
+              video.src = slide.backgroundVideo!;
+              video.load();
+            });
+          } else if (slide.backgroundImage) {
+            // Preload image
+            return new Promise((resolve, reject) => {
+              const img = new Image();
+              img.onload = resolve;
+              img.onerror = reject;
+              img.src = slide.backgroundImage!;
+            });
+          }
+          return Promise.resolve();
         });
 
         // Preload product images

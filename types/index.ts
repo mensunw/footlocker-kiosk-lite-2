@@ -3,7 +3,8 @@ export interface CarouselSlide {
   title: string;
   subtitle: string;
   description: string;
-  backgroundImage: string;
+  backgroundImage?: string;
+  backgroundVideo?: string;
   logoUrl?: string;
   duration: number; // in seconds
 }

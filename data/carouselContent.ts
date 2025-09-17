@@ -19,6 +19,14 @@ export const carouselSlides: CarouselSlide[] = [
   },
   {
     id: '3',
+    title: 'Spin. Zoom. Explore.',
+    subtitle: 'Experience sneakers in 360°',
+    description: 'Get up close and personal with every detail. Rotate, zoom, and discover your next favorite pair.',
+    backgroundVideo: '/360-rendering.mov',
+    duration: 12,
+  },
+  {
+    id: '4',
     title: "Don't Miss the Drop",
     subtitle: 'Jordan. Nike. adidas. New heat lands daily',
     description: 'Be first to get the latest releases from the biggest names in sneakers.',
@@ -26,7 +34,7 @@ export const carouselSlides: CarouselSlide[] = [
     duration: 8,
   },
   {
-    id: '4',
+    id: '5',
     title: 'Fresh Jordan Arrivals',
     subtitle: 'Straight from the Jumpman legacy',
     description: 'Step into greatness with the newest Jordan releases, now at Foot Locker.',

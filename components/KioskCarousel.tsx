@@ -65,13 +65,37 @@ const KioskCarousel: React.FC<CarouselProps> = ({
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="absolute inset-0 w-full h-full"
         >
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${slide.backgroundImage})`,
-            }}
-          />
+          {/* Background Media - Image or Video */}
+          {slide.backgroundVideo ? (
+            <video
+              key={`video-${currentSlide}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onLoadedData={(e) => {
+                const video = e.target as HTMLVideoElement;
+                video.currentTime = 0;
+                video.play().catch(() => {
+                  // Silently handle autoplay failures
+                });
+              }}
+            >
+              <source src={slide.backgroundVideo} type="video/mp4" />
+              <source src={slide.backgroundVideo} type="video/mov" />
+            </video>
+          ) : slide.backgroundImage ? (
+            <div
+              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${slide.backgroundImage})`,
+              }}
+            />
+          ) : (
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-black" />
+          )}
 
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
